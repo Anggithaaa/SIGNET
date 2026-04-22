@@ -426,6 +426,7 @@ function gambarGaris(coords){
 let mode = null;
 let titik = [];
 let markers = [];
+let tooltip = null;
 
 function hitungJarak(){
 
@@ -591,9 +592,48 @@ function resetTool() {
 function setMode(m){
     resetTool();
     mode = m;
+
+    // hapus tooltip lama kalau ada
+    if (tooltip){
+        tooltip.remove();
+        tooltip = null;
+    }
+
+    // tampilkan pesan sesuai mode
+    let pesan = "";
+
+    if (m === "jarak"){
+        pesan = "Klik titik awal & titik akhir";
+    }
+    if (m === "area"){
+        pesan = "Klik beberapa titik, klik kanan untuk selesai";
+    }
+    if (m === "rute"){
+        pesan = "Klik titik awal & tujuan";
+    }
+
+    // buat popup tooltip
+    tooltip = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+    })
+    .setHTML("<div style='font-size:12px'>" + pesan + "</div>")
+    .setLngLat(map.getCenter())
+    .addTo(map);
+
     console.log("MODE:", mode);
 }
 
+map.on('mousemove', function(e){
+    if (tooltip){
+        tooltip.setLngLat(e.lngLat);
+    }
+	if (tooltip){
+    tooltip.remove();
+    tooltip = null;
+	}
+});
+	
 // ================= OPSI MAP =================
 function setStyle(type){
 
