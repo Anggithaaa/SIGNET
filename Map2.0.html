@@ -595,7 +595,6 @@ function setMode(m){
     // hapus tooltip lama kalau ada
     if (tooltip){
         tooltip.remove();
-        tooltip = null;
     }
 
     // tampilkan pesan sesuai mode
@@ -616,8 +615,7 @@ function setMode(m){
         closeButton: false,
         closeOnClick: false
     })
-    .setHTML("<div style='font-size:12px'>" + pesan + "</div>")
-    .setLngLat(map.getCenter())
+    .setHTML("<div style='font-size:12px;background:black;color:white;padding:4px 8px;border-radius:6px'>" + pesan + "</div>")
     .addTo(map);
 
     console.log("MODE:", mode);
@@ -627,10 +625,6 @@ map.on('mousemove', function(e){
     if (tooltip){
         tooltip.setLngLat(e.lngLat);
     }
-	if (tooltip){
-    tooltip.remove();
-    tooltip = null;
-	}
 });
 	
 // ================= OPSI MAP =================
