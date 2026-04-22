@@ -611,14 +611,14 @@ function setMode(m){
     }
 
     // buat popup tooltip
-    tooltip = new mapboxgl.Popup({
+	tooltip = new mapboxgl.Popup({
         closeButton: false,
-        closeOnClick: false
+        closeOnClick: false,
+        offset: [15, 15] // biar ga nutup cursor
     })
+    .setLngLat(map.getCenter()) 
     .setHTML("<div style='font-size:12px;background:black;color:white;padding:4px 8px;border-radius:6px'>" + pesan + "</div>")
     .addTo(map);
-
-    console.log("MODE:", mode);
 }
 
 map.on('mousemove', function(e){
