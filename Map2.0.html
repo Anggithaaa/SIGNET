@@ -373,17 +373,15 @@ function toggleMenu(menu){
 
     let el = document.getElementById("menu-" + menu);
 
-    // cek apakah lagi terbuka
-    let isOpen = el.style.display === "block";
+    let isHidden = el.classList.contains("hidden");
 
-    // tutup semua dropdown
-    document.querySelectorAll('.dropdown').forEach(d => d.style.display='none');
+    // tutup semua
+    document.querySelectorAll('.dropdown').forEach(d => d.classList.add('hidden'));
 
-    // kalau sebelumnya TIDAK terbuka → buka
-    if (!isOpen){
-        el.style.display = "block";
+    // buka kalau sebelumnya hidden
+    if (isHidden){
+        el.classList.remove("hidden");
     }
-
 }
 
 // ================= GARIS =================
@@ -593,6 +591,7 @@ function setMode(m){
     resetTool();
     mode = m;
 
+	console.log("MODE AKTIF:", mode); 
     // hapus tooltip lama kalau ada
     if (tooltip){
         tooltip.remove();
